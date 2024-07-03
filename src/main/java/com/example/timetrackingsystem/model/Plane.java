@@ -28,4 +28,10 @@ public class Plane {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "airline_id", referencedColumnName = "id")
     private Airline airline;
+
+    public Plane(String name, Integer year, Airline airline) {
+        planeName = name;
+        yearOfManufacture = year;
+        this.airline = airline;
+    }
 }

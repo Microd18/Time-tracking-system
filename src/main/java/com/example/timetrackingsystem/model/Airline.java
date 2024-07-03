@@ -23,4 +23,8 @@ public class Airline {
 
     @Column(name = "name", nullable = false)
     private String airlineName;
+
+    public Airline(String name) {
+        airlineName = name;
+    }
 }
