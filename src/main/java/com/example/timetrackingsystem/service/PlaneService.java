@@ -1,6 +1,6 @@
 package com.example.timetrackingsystem.service;
 
-import com.example.timetrackingsystem.model.Plane;
+import com.example.timetrackingsystem.entity.Plane;
 
 import java.util.List;
 

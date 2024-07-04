@@ -1,12 +1,10 @@
-package com.example.timetrackingsystem.model;
+package com.example.timetrackingsystem.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.core.annotation.Order;
 
 @Getter
 @Setter
@@ -14,12 +12,7 @@ import org.springframework.core.annotation.Order;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "plane")
-public class Plane {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer planeId;
+public class Plane extends BaseEntity{
 
     @Column(name = "name", nullable = false)
     private String planeName;
@@ -30,10 +23,4 @@ public class Plane {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "airline_id", referencedColumnName = "id")
     private Airline airline;
-
-    public Plane(String name, Integer year, Airline airline) {
-        planeName = name;
-        yearOfManufacture = year;
-        this.airline = airline;
-    }
 }

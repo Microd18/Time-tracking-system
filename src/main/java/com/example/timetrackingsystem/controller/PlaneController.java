@@ -1,6 +1,6 @@
 package com.example.timetrackingsystem.controller;
 
-import com.example.timetrackingsystem.model.Plane;
+import com.example.timetrackingsystem.entity.Plane;
 import com.example.timetrackingsystem.service.PlaneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

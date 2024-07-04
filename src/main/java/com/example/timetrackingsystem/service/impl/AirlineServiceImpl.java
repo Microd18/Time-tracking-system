@@ -1,7 +1,7 @@
 package com.example.timetrackingsystem.service.impl;
 
 import com.example.timetrackingsystem.exceptions.AirlineNotFoundException;
-import com.example.timetrackingsystem.model.Airline;
+import com.example.timetrackingsystem.entity.Airline;
 import com.example.timetrackingsystem.repository.AirlineRepository;
 import com.example.timetrackingsystem.service.AirlineService;
 import lombok.RequiredArgsConstructor;

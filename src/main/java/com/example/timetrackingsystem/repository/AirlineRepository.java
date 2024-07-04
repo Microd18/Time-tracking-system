@@ -1,6 +1,6 @@
 package com.example.timetrackingsystem.repository;
 
-import com.example.timetrackingsystem.model.Airline;
+import com.example.timetrackingsystem.entity.Airline;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

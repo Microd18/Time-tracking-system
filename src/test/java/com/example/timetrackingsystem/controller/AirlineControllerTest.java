@@ -1,6 +1,6 @@
 package com.example.timetrackingsystem.controller;
 
-import com.example.timetrackingsystem.model.Airline;
+import com.example.timetrackingsystem.entity.Airline;
 import com.example.timetrackingsystem.service.AirlineService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

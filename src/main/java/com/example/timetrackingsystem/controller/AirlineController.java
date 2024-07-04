@@ -1,6 +1,6 @@
 package com.example.timetrackingsystem.controller;
 
-import com.example.timetrackingsystem.model.Airline;
+import com.example.timetrackingsystem.entity.Airline;
 import com.example.timetrackingsystem.service.AirlineService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
