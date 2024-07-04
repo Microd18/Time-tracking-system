@@ -31,7 +31,7 @@ public class PlaneController {
         return ResponseEntity.ok(plane);
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("by-name/{name}")
     public ResponseEntity<Plane> getPlaneByName(@PathVariable("name") String name) {
         Plane plane = planeService.getPlaneByNameIgnoreCase(name);
         return ResponseEntity.ok(plane);
@@ -49,11 +49,18 @@ public class PlaneController {
         return ResponseEntity.ok().build();
     }
 
-    @PatchMapping("/{id}/{name}")
-    public ResponseEntity<Plane> updatePlane(@PathVariable("id") Integer id,
-                                             @PathVariable("name") String name,
-                                             @PathVariable("id") Integer year) {
-        return ResponseEntity.ok(planeService.updatePlane(id, name, year));
+    @PatchMapping()
+    public ResponseEntity<Plane> updatePlane(@RequestParam("id") Integer id,
+                                             @RequestParam("name") String name,
+                                             @RequestParam("year") Integer year,
+                                             @RequestParam("airlineId") Integer airlineId) {
+        return ResponseEntity.ok(planeService.updatePlane(id, name, year, airlineId));
+    }
+
+    @GetMapping("by-airline/{airlineId}")
+    public ResponseEntity<List<Plane>> getPlaneByAirlineId(@PathVariable("airlineId") Integer airlineId) {
+        List<Plane> planes = planeService.getPlanesByAirlineId(airlineId);
+        return ResponseEntity.ok(planes);
     }
 
 }

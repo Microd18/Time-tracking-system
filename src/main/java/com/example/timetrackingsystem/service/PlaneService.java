@@ -1,6 +1,5 @@
 package com.example.timetrackingsystem.service;
 
-import com.example.timetrackingsystem.model.Airline;
 import com.example.timetrackingsystem.model.Plane;
 
 import java.util.List;
@@ -15,7 +14,9 @@ public interface PlaneService {
 
     void deletePlaneById(Integer id);
 
-    Plane updatePlane(Integer id, String name, Integer year);
+    Plane updatePlane(Integer id, String name, Integer year, Integer airlineId);
 
     Plane getPlaneByNameIgnoreCase(String name);
+
+    List<Plane> getPlanesByAirlineId(Integer airlineId);
 }

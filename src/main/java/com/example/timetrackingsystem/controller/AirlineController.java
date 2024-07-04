@@ -31,7 +31,7 @@ public class AirlineController {
         return ResponseEntity.ok(airline);
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/by-name/{name}")
     public ResponseEntity<Airline> getAirlineByName(@PathVariable("name") String name) {
         Airline airline = airlineService.getAirlineByNameIgnoreCase(name);
         return ResponseEntity.ok(airline);

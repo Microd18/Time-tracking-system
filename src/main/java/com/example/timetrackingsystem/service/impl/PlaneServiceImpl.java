@@ -9,11 +9,13 @@ import com.example.timetrackingsystem.repository.PlaneRepository;
 import com.example.timetrackingsystem.service.PlaneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class PlaneServiceImpl implements PlaneService {
 
     private final PlaneRepository planeRepository;
@@ -41,10 +43,12 @@ public class PlaneServiceImpl implements PlaneService {
     }
 
     @Override
-    public Plane updatePlane(Integer id, String name, Integer year) {
+    public Plane updatePlane(Integer id, String name, Integer year, Integer airlineId) {
         Plane plane = planeRepository.findById(id).orElseThrow(PlaneNotFoundException::new);
+        Airline airline = airlineRepository.findById(airlineId).orElseThrow(AirlineNotFoundException::new);
         plane.setPlaneName(name);
         plane.setYearOfManufacture(year);
+        plane.setAirline(airline);
         return planeRepository.save(plane);
     }
 
@@ -53,6 +57,7 @@ public class PlaneServiceImpl implements PlaneService {
         return planeRepository.findByPlaneNameIgnoreCase(name).orElseThrow(PlaneNotFoundException::new);
     }
 
+    @Override
     public List<Plane> getPlanesByAirlineId(Integer airlineId) {
         return planeRepository.findPlanesByAirline_AirlineId(airlineId);
     }

@@ -1,10 +1,12 @@
 package com.example.timetrackingsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.core.annotation.Order;
 
 @Getter
 @Setter
@@ -25,7 +27,7 @@ public class Plane {
     @Column(name = "year_of_manufacture", nullable = false)
     private Integer yearOfManufacture;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "airline_id", referencedColumnName = "id")
     private Airline airline;
 
