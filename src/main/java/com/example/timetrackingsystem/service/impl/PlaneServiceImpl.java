@@ -59,6 +59,6 @@ public class PlaneServiceImpl implements PlaneService {
 
     @Override
     public List<Plane> getPlanesByAirlineId(Integer airlineId) {
-        return planeRepository.findPlanesByAirline_AirlineId(airlineId);
+        return planeRepository.findPlanesByAirline_Id(airlineId);
     }
 }

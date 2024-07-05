@@ -55,7 +55,6 @@ public class AirlineControllerTest {
     @Test
     void getAirlineById() throws Exception {
         Airline airline = new Airline();
-        airline.setAirlineId(1);
         airline.setAirlineName("Test Airline");
         when(airlineService.getAirlineById(anyInt())).thenReturn(airline);
 
