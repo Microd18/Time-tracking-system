@@ -1,6 +1,7 @@
 package com.example.timetrackingsystem.exceptions.handler;
 
 import com.example.timetrackingsystem.exceptions.AirlineNotFoundException;
+import com.example.timetrackingsystem.exceptions.ExecutionTimeTrackingException;
 import com.example.timetrackingsystem.exceptions.PlaneNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,5 +23,11 @@ public class ExceptionHandlerClass {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String planeNotFoundExceptionHandler(PlaneNotFoundException e) {
         return "Самолет не найден!";
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String executionTimeTrackingException(ExecutionTimeTrackingException e) {
+        return "Ошибка подсчета времени!";
     }
 }

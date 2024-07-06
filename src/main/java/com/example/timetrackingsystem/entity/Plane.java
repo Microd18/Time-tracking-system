@@ -21,6 +21,6 @@ public class Plane extends BaseEntity{
     private Integer yearOfManufacture;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "airline_id", referencedColumnName = "id")
+    @JoinColumn(name = "airline_id", referencedColumnName = "id", nullable = true)
     private Airline airline;
 }
