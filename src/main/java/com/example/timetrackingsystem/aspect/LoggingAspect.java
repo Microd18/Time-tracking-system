@@ -2,7 +2,6 @@ package com.example.timetrackingsystem.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -14,14 +13,17 @@ import org.springframework.stereotype.Component;
 public class LoggingAspect {
 
     @Pointcut("execution(* com.example.timetrackingsystem.controller..*(..))")
-    public void controllerMethodsPointcut() {}
+    public void controllerMethodsPointcut() {
+    }
 
     @Pointcut("execution(* com.example.timetrackingsystem.service..*(..))")
-    public void serviceMethodsPointcut() {}
+    public void serviceMethodsPointcut() {
+    }
 
     @Pointcut("execution(@org.springframework.web.bind.annotation.ExceptionHandler * *(..))")
     public void exceptionPointcut() {
     }
+
     @Around("controllerMethodsPointcut()")
     public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
