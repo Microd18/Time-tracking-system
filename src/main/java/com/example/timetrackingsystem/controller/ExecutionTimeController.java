@@ -14,6 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Контроллер для управления запросами, связанными с отслеживанием времени выполнения.
+ * <p>
+ * Этот контроллер предоставляет REST API для получения информации о времени выполнения синхронных и асинхронных методов,
+ * а также для получения всех данных о времени выполнения.
+ * </p>
+ */
+
 @RestController
 @RequestMapping("/time_track")
 @Tag(name = "Трекер времени")
@@ -22,6 +30,17 @@ public class ExecutionTimeController {
 
     private final ExecutionTimeService executionTimeService;
 
+    /**
+     * Получает список всех данных о времени выполнения.
+     * <p>
+     * Метод обрабатывает GET-запрос для получения списка всех данных о времени выполнения с поддержкой пагинации.
+     * Параметры запроса `pageNumber` и `pageSize` используются для указания номера страницы и размера страницы соответственно.
+     * </p>
+     *
+     * @param pageNumber номер страницы (необязательный параметр)
+     * @param pageSize   размер страницы (необязательный параметр)
+     * @return {@link ResponseEntity} со списком данных о времени выполнения
+     */
     @GetMapping("/all")
     public ResponseEntity<List<ExecutionTime>> getAllExecutionTime(@RequestParam(name = "pageNumber", required = false) Integer pageNumber,
                                                                    @RequestParam(name = "pageSize", required = false) Integer pageSize) {
@@ -29,12 +48,30 @@ public class ExecutionTimeController {
         return ResponseEntity.ok(executionTimes);
     }
 
+    /**
+     * Получает данные о времени выполнения методов, выполняемых синхронно, по имени метода.
+     * <p>
+     * Параметр запроса `name` используется для фильтрации данных по имени метода.
+     * </p>
+     *
+     * @param methodName имя метода (необязательный параметр)
+     * @return {@link ResponseEntity} со списком данных о времени выполнения методов, выполняемых синхронно.
+     */
     @GetMapping("/sync")
     public ResponseEntity<List<ExecutionTimeProjection>> getSyncExecutionTimeByMethod(@RequestParam(name = "name", required = false) String methodName) {
         List<ExecutionTimeProjection> executionTimes = executionTimeService.getSyncExecutionTimeByMethod(methodName);
         return ResponseEntity.ok(executionTimes);
     }
 
+    /**
+     * Получает данные о времени выполнения методов, выполняемых асинхронно, по имени метода.
+     * <p>
+     * Параметр запроса `name` используется для фильтрации данных по имени метода.
+     * </p>
+     *
+     * @param methodName имя метода (необязательный параметр)
+     * @return {@link ResponseEntity} со списком данных о времени выполнения методов, выполняемых асинхронно.
+     */
     @GetMapping("/async")
     public ResponseEntity<List<ExecutionTimeProjection>> getAsyncExecutionTimeByMethod(@RequestParam(name = "name", required = false) String methodName) {
         List<ExecutionTimeProjection> executionTimes = executionTimeService.getAsyncExecutionTimeByMethod(methodName);

@@ -1,14 +1,26 @@
 package com.example.timetrackingsystem.aspect;
 
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+/**
+ * Аспект для логирования выполнения методов, а также обработки исключений.
+ * <p>
+ * Этот аспект содержит три основных точки среза:
+ * <ul>
+ *     <li>Методы контроллеров (в пакетах <code>com.example.timetrackingsystem.controller</code>)</li>
+ *     <li>Методы сервисов (в пакетах <code>com.example.timetrackingsystem.service</code>)</li>
+ *     <li>Методы, аннотированные @ExceptionHandler</li>
+ * </ul>
+ * </p>
+ * <p>
+ * Для методов контроллеров и сервисов логируются имена методов, аргументы и результаты выполнения. Для методов обработки исключений логируются выброшенные исключения и аргументы.
+ * </p>
+ */
 @Aspect
 @Component
 @Slf4j

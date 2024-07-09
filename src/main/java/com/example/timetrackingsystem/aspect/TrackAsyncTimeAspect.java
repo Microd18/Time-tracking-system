@@ -14,6 +14,13 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Аспект для отслеживания времени выполнения методов, помеченных аннотацией {@link com.example.timetrackingsystem.annotation.TrackAsyncTime}.
+ * <p>
+ * Этот аспект позволяет выполнять методы асинхронно, используя {@link CompletableFuture}, и отслеживать время их выполнения.
+ * </p>
+ */
+
 @Component
 @Aspect
 @RequiredArgsConstructor

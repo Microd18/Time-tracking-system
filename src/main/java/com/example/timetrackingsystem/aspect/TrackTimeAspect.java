@@ -8,6 +8,13 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+/**
+ * Аспект для отслеживания времени выполнения методов, помеченных аннотацией {@link com.example.timetrackingsystem.annotation.TrackTime}.
+ * <p>
+ * Этот аспект используется для синхронного отслеживания времени выполнения методов.
+ * Методы, помеченные аннотацией {@link com.example.timetrackingsystem.annotation.TrackTime}, будут выполнены с отслеживанием времени.
+ * </p>
+ */
 @Component
 @Aspect
 @RequiredArgsConstructor

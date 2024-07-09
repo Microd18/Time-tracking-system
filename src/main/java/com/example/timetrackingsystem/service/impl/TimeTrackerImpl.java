@@ -12,6 +12,9 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Реализация сервиса для отслеживания времени выполнения методов.
+ */
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -20,6 +23,13 @@ public class TimeTrackerImpl implements TimeTracker {
 
     private final ExecutionTimeServiceImpl executionTimeService;
 
+    /**
+     * Отслеживает время выполнения метода и сохраняет информацию о времени выполнения.
+     *
+     * @param proceedingJoinPoint точка соединения, представляющая метод, время выполнения которого нужно отслеживать
+     * @param executionType       тип выполнения (например, "SYNCHRONOUS" или "ASYNCHRONOUS")
+     * @return результат выполнения метода
+     */
     @Override
     public Object trackTime(ProceedingJoinPoint proceedingJoinPoint, String executionType) {
         try {
