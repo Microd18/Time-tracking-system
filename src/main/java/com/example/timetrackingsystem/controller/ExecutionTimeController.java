@@ -23,7 +23,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/time_track")
+@RequestMapping("/track_time")
 @Tag(name = "Трекер времени")
 @RequiredArgsConstructor
 public class ExecutionTimeController {

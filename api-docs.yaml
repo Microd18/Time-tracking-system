@@ -166,7 +166,7 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/Airline'
-  /time_track/sync:
+  /track_time/sync:
     get:
       tags:
         - Трекер времени
@@ -199,7 +199,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ExecutionTimeProjection'
-  /time_track/async:
+  /track_time/async:
     get:
       tags:
         - Трекер времени
@@ -232,7 +232,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ExecutionTimeProjection'
-  /time_track/all:
+  /track_time/all:
     get:
       tags:
         - Трекер времени
