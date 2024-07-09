@@ -1,6 +1,8 @@
 package com.example.timetrackingsystem.aspect;
 
+import com.example.timetrackingsystem.exceptions.AirlineNotFoundException;
 import com.example.timetrackingsystem.exceptions.ExecutionTimeTrackingException;
+import com.example.timetrackingsystem.exceptions.PlaneNotFoundException;
 import com.example.timetrackingsystem.service.impl.TimeTrackerImpl;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -26,11 +28,21 @@ public class TrackAsyncTimeAspect {
     @Around("trackAsyncTimePointcut()")
     public Object trackAsyncTime(ProceedingJoinPoint proceedingJoinPoint) {
         CompletableFuture<Object> completableFuture = CompletableFuture.supplyAsync(() -> timeTracker.trackTime(proceedingJoinPoint, "ASYNCHRONOUS"));
+
         try {
             return completableFuture.get();
-        } catch (InterruptedException | ExecutionException e) {
+        } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             throw new ExecutionTimeTrackingException();
+        } catch (ExecutionException e) {
+            Throwable cause = e.getCause();
+            if (cause instanceof AirlineNotFoundException) {
+                throw (AirlineNotFoundException) cause;
+            } else if (cause instanceof PlaneNotFoundException) {
+                throw (PlaneNotFoundException) cause;
+            } else {
+                throw new ExecutionTimeTrackingException();
+            }
         }
     }
 }

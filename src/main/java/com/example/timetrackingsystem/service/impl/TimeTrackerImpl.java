@@ -2,8 +2,9 @@ package com.example.timetrackingsystem.service.impl;
 
 import com.example.timetrackingsystem.entity.ExecutionTime;
 import com.example.timetrackingsystem.enums.ExecutionType;
+import com.example.timetrackingsystem.exceptions.AirlineNotFoundException;
 import com.example.timetrackingsystem.exceptions.ExecutionTimeTrackingException;
-import com.example.timetrackingsystem.repository.ExecutionTimeRepository;
+import com.example.timetrackingsystem.exceptions.PlaneNotFoundException;
 import com.example.timetrackingsystem.service.TimeTracker;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TimeTrackerImpl implements TimeTracker {
 
     private final ExecutionTimeServiceImpl executionTimeService;
+
     @Override
     public Object trackTime(ProceedingJoinPoint proceedingJoinPoint, String executionType) {
         try {
@@ -33,6 +35,10 @@ public class TimeTrackerImpl implements TimeTracker {
             executionTimeService.saveExecutionTime(executionTime);
 
             return result;
+        } catch (AirlineNotFoundException e) {
+            throw new AirlineNotFoundException();
+        } catch (PlaneNotFoundException e) {
+            throw new PlaneNotFoundException();
         } catch (Throwable e) {
             throw new ExecutionTimeTrackingException();
         }

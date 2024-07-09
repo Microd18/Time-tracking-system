@@ -11,5 +11,6 @@ import java.util.Optional;
 public interface PlaneRepository extends JpaRepository<Plane, Integer> {
 
     Optional<Plane> findByPlaneNameIgnoreCase(String name);
+
     List<Plane> findPlanesByAirline_Id(Integer id);
 }

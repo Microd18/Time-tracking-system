@@ -1,0 +1,584 @@
+openapi: 3.0.1
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+info:
+  title: Система мониторинга времени выполнения методов
+  description: Отслеживание времени выполнения методов в синхронном/асинхронном режиме, на примере стандартных методов по управлению авиакомпанией
+  version: 1.0.0
+paths:
+  /plane:
+    post:
+      tags:
+        - Самолет
+      summary: 'Добавление самолета'
+      operationId: addPlane
+      parameters:
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: year
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: airlineId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Plane'
+    patch:
+      tags:
+        - Самолет
+      summary: 'Изменение самолета'
+      operationId: updatePlane
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: year
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: airlineId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Plane'
+  /airline:
+    post:
+      tags:
+        - Авиакомпания
+      summary: 'Добавление авиакомпании'
+      operationId: addAirline
+      parameters:
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Airline'
+  /airline/{id}/{name}:
+    patch:
+      tags:
+        - Авиакомпания
+      summary: 'Изменение авиакомпании'
+      operationId: updateAirline
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Airline'
+  /time_track/sync:
+    get:
+      tags:
+        - Трекер времени
+      summary: 'Получение времени выполнения метода, который выполнялся синхронно'
+      operationId: getSyncExecutionTimeByMethod
+      parameters:
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExecutionTimeProjection'
+  /time_track/async:
+    get:
+      tags:
+        - Трекер времени
+      summary: 'Получение времени выполнения метода, который выполнялся асинхронно'
+      operationId: getAsyncExecutionTimeByMethod
+      parameters:
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExecutionTimeProjection'
+  /time_track/all:
+    get:
+      tags:
+        - Трекер времени
+      summary: 'Получение времени выполнения всех методов, с возможностью постраничного просмотра'
+      operationId: getAllExecutionTime
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExecutionTime'
+  /plane/{id}:
+    get:
+      tags:
+        - Самолет
+      summary: 'Получение самолета по ID'
+      operationId: getPlaneById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Plane'
+    delete:
+      tags:
+        - Самолет
+      summary: 'Удаление самолета по ID'
+      operationId: deletePlane
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+  /plane/by-name/{name}:
+    get:
+      tags:
+        - Самолет
+      summary: 'Получение самолета по названию'
+      operationId: getPlaneByName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Plane'
+  /plane/by-airline/{airlineId}:
+    get:
+      tags:
+        - Самолет
+      summary: 'Получение самолета по ID авиакомпании'
+      operationId: getPlaneByAirlineId
+      parameters:
+        - name: airlineId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Plane'
+  /plane/all:
+    get:
+      tags:
+        - Самолет
+      summary: 'Получение всех самолетов'
+      operationId: getAllPlanes
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Plane'
+  /airline/{id}:
+    get:
+      tags:
+        - Авиакомпания
+      summary: 'Получение авиакомпании по ID'
+      operationId: getAirlineById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Airline'
+    delete:
+      tags:
+        - Авиакомпания
+      summary: 'Удаление авиакомпании по ID'
+      operationId: deleteAirline
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+  /airline/by-name/{name}:
+    get:
+      tags:
+        - Авиакомпания
+      summary: 'Получение авиакомпании по названию'
+      operationId: getAirlineByName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Airline'
+  /airline/all:
+    get:
+      tags:
+        - Авиакомпания
+      summary: 'Получение всех авиакомпании'
+      operationId: getAllAirlines
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Airline'
+components:
+  schemas:
+    Airline:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        airlineName:
+          type: string
+    Plane:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        planeName:
+          type: string
+        yearOfManufacture:
+          type: integer
+          format: int32
+        airline:
+          $ref: '#/components/schemas/Airline'
+    ExecutionTimeProjection:
+      type: object
+      properties:
+        methodName:
+          type: string
+        executionType:
+          type: string
+          enum:
+            - SYNCHRONOUS
+            - ASYNCHRONOUS
+        totalExecutionTime:
+          type: integer
+          format: int64
+        averageExecutionTime:
+          type: integer
+          format: int64
+    ExecutionTime:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        methodName:
+          type: string
+        executionTime:
+          type: integer
+          format: int64
+        executionType:
+          type: string
+          enum:
+            - SYNCHRONOUS
+            - ASYNCHRONOUS

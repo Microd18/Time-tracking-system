@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "plane")
-public class Plane extends BaseEntity{
+public class Plane extends BaseEntity {
 
     @Column(name = "name", nullable = false)
     private String planeName;
@@ -21,6 +21,6 @@ public class Plane extends BaseEntity{
     private Integer yearOfManufacture;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "airline_id", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "airline_id", referencedColumnName = "id")
     private Airline airline;
 }

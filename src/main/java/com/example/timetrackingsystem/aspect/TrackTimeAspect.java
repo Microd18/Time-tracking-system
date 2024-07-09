@@ -16,7 +16,8 @@ public class TrackTimeAspect {
     private final TimeTrackerImpl timeTracker;
 
     @Pointcut("@annotation(com.example.timetrackingsystem.annotation.TrackTime)")
-    public void trackTimePointcut() {}
+    public void trackTimePointcut() {
+    }
 
     @Around("trackTimePointcut()")
     public Object trackTime(ProceedingJoinPoint proceedingJoinPoint) {

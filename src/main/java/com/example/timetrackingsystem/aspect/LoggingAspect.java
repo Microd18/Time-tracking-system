@@ -1,7 +1,9 @@
 package com.example.timetrackingsystem.aspect;
 
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -24,8 +26,9 @@ public class LoggingAspect {
     public void exceptionPointcut() {
     }
 
+
     @Around("controllerMethodsPointcut()")
-    public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public Object aroundControllerMethods(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
         String methodName = proceedingJoinPoint.getSignature().getName();
         Object[] methodArgs = proceedingJoinPoint.getArgs();
@@ -40,17 +43,15 @@ public class LoggingAspect {
     }
 
     @Around("exceptionPointcut()")
-    public Object after(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public Object afterExceptionHandler(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
         String methodName = proceedingJoinPoint.getSignature().getName();
         Object[] methodArgs = proceedingJoinPoint.getArgs();
 
         Object result = proceedingJoinPoint.proceed();
 
-        log.info("Выброшено исключение: {} - {} - {}", methodName, result, methodArgs);
+        log.error("Выброшено исключение: {} - {} - {}", methodName, result, methodArgs);
 
         return result;
     }
-
-
 }

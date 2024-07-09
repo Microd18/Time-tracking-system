@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ExceptionHandlerClass {
 
-    @ExceptionHandler
+    @ExceptionHandler(AirlineNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String airlineNotFoundExceptionHandler(AirlineNotFoundException e) {
         return "Авиакомпания не найдена!";
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(PlaneNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String planeNotFoundExceptionHandler(PlaneNotFoundException e) {
         return "Самолет не найден!";
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(ExecutionTimeTrackingException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String executionTimeTrackingException(ExecutionTimeTrackingException e) {
         return "Ошибка подсчета времени!";

@@ -1,9 +1,9 @@
 package com.example.timetrackingsystem.service.impl;
 
-import com.example.timetrackingsystem.exceptions.AirlineNotFoundException;
-import com.example.timetrackingsystem.exceptions.PlaneNotFoundException;
 import com.example.timetrackingsystem.entity.Airline;
 import com.example.timetrackingsystem.entity.Plane;
+import com.example.timetrackingsystem.exceptions.AirlineNotFoundException;
+import com.example.timetrackingsystem.exceptions.PlaneNotFoundException;
 import com.example.timetrackingsystem.repository.AirlineRepository;
 import com.example.timetrackingsystem.repository.PlaneRepository;
 import com.example.timetrackingsystem.service.PlaneService;
