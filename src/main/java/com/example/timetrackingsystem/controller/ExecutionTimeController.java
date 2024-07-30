@@ -26,7 +26,8 @@ import java.util.List;
 @RequestMapping("/track_time")
 @Tag(name = "Трекер времени")
 @RequiredArgsConstructor
-public class ExecutionTimeController {
+public class ExecutionTimeController
+{
 
     private final ExecutionTimeService executionTimeService;
 
